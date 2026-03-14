@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Kael - Altharys - Seconde Vie</title>
+  <meta name="description" content="Page personnage dédiée à Kael dans l'univers d'Altharys - Seconde Vie." />
+  <style>
+    :root {
+      --bg: #07110d;
+      --bg-soft: #0d1b15;
+      --panel: rgba(8, 18, 14, 0.78);
+      --border: rgba(170, 220, 190, 0.12);
+      --text: #eef6ee;
+      --muted: #c9d9cf;
+      --accent: #93b857;
+      --shadow: 0 20px 50px rgba(0,0,0,0.35);
+      --radius: 24px;
+      --max: 1180px;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      color: var(--text);
+      background:
+        linear-gradient(180deg, rgba(4,9,7,0.95), rgba(4,9,7,0.98)),
+        radial-gradient(circle at top, rgba(147,184,87,0.12), transparent 30%),
+        #050b08;
+      line-height: 1.6;
+    }
+
+    a { color: inherit; text-decoration: none; }
+    img { max-width: 100%; display: block; }
+
+    .container {
+      width: min(calc(100% - 2rem), var(--max));
+      margin: 0 auto;
+    }
+
+    .site-header {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      backdrop-filter: blur(10px);
+      background: rgba(4, 9, 7, 0.84);
+      border-bottom: 1px solid rgba(170,220,190,0.08);
+    }
+
+    .nav {
+      min-height: 74px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+    }
+
+    .brand {
+      font-weight: 800;
+      letter-spacing: 0.04em;
+      font-size: 1.05rem;
+    }
+
+    .brand span { color: var(--accent); }
+
+    .nav-links {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+      color: var(--muted);
+    }
+
+    .nav-links a:hover,
+    .nav-links a:focus-visible {
+      color: var(--text);
+    }
+
+    .page-hero {
+      padding: 3.5rem 0 2rem;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.45rem 0.9rem;
+      border-radius: 999px;
+      background: rgba(147,184,87,0.14);
+      border: 1px solid rgba(147,184,87,0.22);
+      color: #d8efaf;
+      font-size: 0.85rem;
+      margin-bottom: 1rem;
+    }
+
+    h1, h2, h3, p { margin-top: 0; }
+
+    h1 {
+      font-size: clamp(2.3rem, 4vw, 4rem);
+      line-height: 1.05;
+      margin-bottom: 0.8rem;
+    }
+
+    .lead {
+      color: var(--muted);
+      max-width: 65ch;
+      margin-bottom: 0;
+    }
+
+    .layout {
+      display: grid;
+      grid-template-columns: minmax(280px, 420px) 1fr;
+      gap: 1.5rem;
+      align-items: start;
+      padding: 1rem 0 4rem;
+    }
+
+    .portrait-card,
+    .sheet-card {
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(10px);
+    }
+
+    .portrait-card {
+      padding: 1rem;
+      position: sticky;
+      top: 92px;
+    }
+
+    .portrait-card img {
+      width: 100%;
+      border-radius: 18px;
+      background: rgba(255,255,255,0.03);
+    }
+
+    .sheet-card {
+      padding: 1.25rem;
+    }
+
+    .sheet-frame {
+      border: 2px solid rgba(255,255,255,0.65);
+      padding: 1rem;
+      background:
+        linear-gradient(180deg, rgba(255,255,255,0.98), rgba(245,245,241,0.98));
+      color: #141414;
+      box-shadow: inset 0 0 0 2px rgba(0,0,0,0.18);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .sheet-frame::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        repeating-linear-gradient(
+          0deg,
+          rgba(0,0,0,0.02) 0,
+          rgba(0,0,0,0.02) 1px,
+          transparent 1px,
+          transparent 22px
+        );
+      opacity: 0.5;
+      pointer-events: none;
+    }
+
+    .sheet-inner {
+      position: relative;
+      z-index: 1;
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1rem;
+    }
+
+    .sheet-title {
+      border: 3px solid #1a1a1a;
+      padding: 0.75rem 1rem;
+      text-align: center;
+      background: linear-gradient(180deg, rgba(0,0,0,0.88), rgba(28,28,28,0.92));
+      color: #fff;
+    }
+
+    .sheet-title h2 {
+      margin: 0;
+      font-size: clamp(2rem, 3vw, 3rem);
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      font-family: Impact, Haettenschweiler, "Arial Narrow Bold", sans-serif;
+      font-weight: 700;
+    }
+
+    .sheet-subtitle {
+      text-align: center;
+      font-size: 0.95rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      border-top: 2px solid #1a1a1a;
+      border-bottom: 2px solid #1a1a1a;
+      padding: 0.75rem 0;
+    }
+
+    .sheet-block {
+      border-top: 2px solid #1a1a1a;
+      padding-top: 1rem;
+    }
+
+    .sheet-label {
+      font-size: 1.1rem;
+      margin-bottom: 0.45rem;
+      display: block;
+    }
+
+    .sheet-value-strong {
+      font-size: clamp(1.5rem, 3vw, 2.4rem);
+      line-height: 1.05;
+      font-family: Impact, Haettenschweiler, "Arial Narrow Bold", sans-serif;
+      text-transform: uppercase;
+    }
+
+    .sheet-value {
+      font-size: 1.1rem;
+      line-height: 1.55;
+    }
+
+    .sheet-note {
+      font-size: 1.05rem;
+      line-height: 1.55;
+      text-transform: uppercase;
+      letter-spacing: 0.01em;
+      font-weight: 700;
+    }
+
+    .back-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.45rem;
+      color: var(--muted);
+      margin-bottom: 1rem;
+    }
+
+    .back-link:hover,
+    .back-link:focus-visible {
+      color: var(--text);
+    }
+
+    @media (max-width: 920px) {
+      .layout {
+        grid-template-columns: 1fr;
+      }
+
+      .portrait-card {
+        position: static;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .nav {
+        padding: 0.8rem 0;
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .sheet-frame {
+        padding: 0.8rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <div class="container nav">
+      <a href="index.html" class="brand">ALTHARYS <span>- Seconde Vie</span></a>
+      <nav class="nav-links">
+        <a href="index.html#a-propos">À propos</a>
+        <a href="index.html#lire">Lire</a>
+        <a href="index.html#univers">Univers</a>
+        <a href="index.html#news">Actualités</a>
+        <a href="index.html#liens">Liens</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="page-hero">
+      <div class="container">
+        <a class="back-link" href="index.html#univers">← Retour à l'univers</a>
+        <div class="eyebrow">Personnages</div>
+        <h1>Kael</h1>
+        <p class="lead">La première vraie porte d’entrée dans l’univers d’Altharys. Un homme d'une trentaine d'années réincarné dans un corps qui n’est plus humain, entre instinct, reconstruction et attachement à un nouveau monde.</p>
+      </div>
+    </section>
+
+    <section>
+      <div class="container layout">
+        <aside class="portrait-card">
+          <img src="images/kael-portrait.png" alt="Portrait de Kael" />
+        </aside>
+
+        <article class="sheet-card">
+          <div class="sheet-frame">
+            <div class="sheet-inner">
+              <div class="sheet-title">
+                <h2>Kael</h2>
+              </div>
+
+              <div class="sheet-subtitle">Fiche Personnage</div>
+
+              <div class="sheet-block">
+                <span class="sheet-label">◆ Caractère :</span>
+                <div class="sheet-value-strong">Observateur - Curieux - Protecteur</div>
+              </div>
+
+              <div class="sheet-block">
+                <span class="sheet-label">◆ Signe distinctif :</span>
+                <div class="sheet-value"><strong>Deux grains de beauté sous l’œil gauche</strong> Porte constament un chaperon vert.</div>
+              </div>
+
+              <div class="sheet-block">
+                <span class="sheet-label">Note :</span>
+                <div class="sheet-note">
+                  Après sa mort sur Terre, Kael a passé plusieurs années à tenter de s’adapter à ce nouveau monde étrange et à la tribu dans laquelle il est revenu à la vie.<br /><br />
+                 Il est encore un peu berçés par son imagination venant de son ancienne vie en découvrant peu a peu Altharys et peut-être pas encore assez conscient de ce qui se trame dans le monde ..
+                </div>
+              </div>
+            </div>
+          </div>
+        </article>
+      </div>
+    </section>
+  </main>
+</body>
+</html>

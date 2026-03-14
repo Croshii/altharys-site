@@ -1,0 +1,555 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Altharys - Seconde Vie</title>
+  <meta name="description" content="Site officiel d'Altharys - Seconde Vie, la web novel fantasy écrite par Roshi." />
+  <style>
+    :root {
+      --bg: #07110d;
+      --bg-soft: #0d1b15;
+      --panel: rgba(7, 20, 15, 0.72);
+      --border: rgba(170, 220, 190, 0.14);
+      --text: #eef6ee;
+      --muted: #c9d9cf;
+      --gold: #9bbf56;
+      --gold-soft: rgba(155,191,86,0.16);
+      --shadow: 0 18px 50px rgba(0,0,0,0.35);
+      --max: 1120px;
+      --radius: 20px;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background:
+        linear-gradient(180deg, rgba(5, 10, 8, 0.97) 0%, rgba(6, 14, 11, 0.94) 100%),
+        radial-gradient(circle at top, rgba(120, 168, 98, 0.14), transparent 28%),
+        linear-gradient(180deg, #040806 0%, #07110d 100%);
+      color: var(--text);
+      line-height: 1.6;
+    }
+
+    a { color: inherit; text-decoration: none; }
+    img { max-width: 100%; display: block; }
+
+    .container {
+      width: min(calc(100% - 2rem), var(--max));
+      margin: 0 auto;
+    }
+
+    .site-header {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      backdrop-filter: blur(10px);
+      background: rgba(4, 9, 7, 0.82);
+      border-bottom: 1px solid rgba(170,220,190,0.08);
+    }
+
+    .nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 1rem;
+      min-height: 74px;
+    }
+
+    .brand {
+      font-weight: 800;
+      letter-spacing: 0.04em;
+      font-size: 1.05rem;
+    }
+
+    .brand span {
+      color: var(--gold);
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .nav-links a {
+      color: var(--muted);
+      font-size: 0.96rem;
+      transition: color 0.2s ease;
+    }
+
+    .nav-links a:hover,
+    .nav-links a:focus-visible {
+      color: var(--text);
+    }
+
+    .hero {
+      padding: 5.5rem 0 4rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(
+          180deg,
+          rgba(4, 9, 7, 0.42) 0%,
+          rgba(4, 9, 7, 0.48) 55%,
+          rgba(4, 9, 7, 0.72) 78%,
+          rgba(4, 9, 7, 0.94) 92%,
+          rgba(4, 9, 7, 1) 100%
+        ),
+        url("images/jungle-bg.png") center center / cover no-repeat;
+      opacity: 0.95;
+      pointer-events: none;
+    }
+
+    .hero .container {
+      position: relative;
+      z-index: 1;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.2fr 0.8fr;
+      gap: 2rem;
+      align-items: center;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.45rem 0.9rem;
+      border-radius: 999px;
+      background: rgba(155,191,86,0.14);
+      border: 1px solid rgba(155,191,86,0.24);
+      color: #d5ecad;
+      font-size: 0.85rem;
+      margin-bottom: 1rem;
+      backdrop-filter: blur(6px);
+    }
+
+    h1, h2, h3 { line-height: 1.1; margin: 0; }
+
+    h1 {
+      font-size: clamp(2.5rem, 5vw, 4.8rem);
+      margin-bottom: 1rem;
+    }
+
+    .hero p {
+      color: var(--muted);
+      max-width: 62ch;
+      font-size: 1.02rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .hero-card,
+    .card,
+    .chapter-card,
+    .news-card,
+    .link-card {
+      background: rgba(7,20,15,0.55);
+      border: 1px solid rgba(170,220,190,0.08);
+      box-shadow: var(--shadow);
+      border-radius: var(--radius);
+      backdrop-filter: blur(8px);
+    }
+
+    .hero-card {
+      padding: 1.4rem;
+      min-height: 360px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      background: linear-gradient(180deg, rgba(7,20,15,0.78), rgba(7,20,15,0.72));
+      border: 1px solid rgba(189, 227, 196, 0.12);
+      box-shadow: 0 18px 50px rgba(0,0,0,0.4);
+      backdrop-filter: blur(10px);
+      overflow: hidden;
+      position: relative;
+    }
+
+    .hero-logo {
+      position: relative;
+      z-index: 1;
+      width: min(100%, 420px);
+      height: auto;
+      object-fit: contain;
+      filter: drop-shadow(0 10px 30px rgba(0,0,0,0.45));
+      margin-bottom: 1rem;
+    }
+
+    .hero-card-text {
+      position: relative;
+      z-index: 1;
+      max-width: 34ch;
+    }
+
+    .hero-card {
+      padding: 1.2rem;
+      min-height: 360px;
+      display: flex;
+      flex-direction: column;
+      justify-content: end;
+      background:
+        linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.05)),
+        radial-gradient(circle at top, rgba(216,178,110,0.22), transparent 30%),
+        linear-gradient(180deg, #22283a 0%, #10131d 100%);
+      overflow: hidden;
+      position: relative;
+    }
+
+    .hero-card::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+      pointer-events: none;
+    }
+
+    .hero-card h3 {
+      font-size: 1.35rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .hero-card p {
+      margin: 0;
+      font-size: 0.95rem;
+    }
+
+    .button-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.85rem;
+      margin-top: 1.4rem;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      min-height: 48px;
+      padding: 0 1.15rem;
+      border-radius: 999px;
+      border: 1px solid transparent;
+      font-weight: 700;
+      transition: transform 0.18s ease, border-color 0.18s ease, background 0.18s ease;
+    }
+
+    .btn:hover,
+    .btn:focus-visible {
+      transform: translateY(-1px);
+    }
+
+    .btn-primary {
+      background: linear-gradient(180deg, #88ab4c, #6f8f3e);
+      color: #f5f9ed;
+      box-shadow: 0 10px 25px rgba(96, 133, 48, 0.28);
+    }
+
+    .btn-secondary {
+      background: rgba(7,20,15,0.38);
+      border-color: rgba(170,220,190,0.12);
+      color: var(--text);
+      backdrop-filter: blur(8px);
+    }
+
+    section {
+      padding: 2rem 0;
+    }
+
+    .section-title {
+      display: flex;
+      justify-content: space-between;
+      align-items: end;
+      gap: 1rem;
+      margin-bottom: 1.15rem;
+    }
+
+    .section-title p {
+      margin: 0.4rem 0 0;
+      color: var(--muted);
+      max-width: 60ch;
+    }
+
+    .grid-3,
+    .grid-2 {
+      display: grid;
+      gap: 1rem;
+    }
+
+    .grid-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+    .grid-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+
+    .card {
+      padding: 1.2rem;
+    }
+
+    .card h3 {
+      font-size: 1.05rem;
+      margin-bottom: 0.6rem;
+    }
+
+    .card p,
+    .chapter-card p,
+    .news-card p,
+    .link-card p {
+      color: var(--muted);
+      margin: 0;
+    }
+
+    .chapter-card,
+    .news-card,
+    .link-card {
+      padding: 1.2rem;
+    }
+
+    .meta {
+      display: inline-block;
+      font-size: 0.82rem;
+      color: #d8efaf;
+      background: rgba(155,191,86,0.14);
+      padding: 0.35rem 0.7rem;
+      border-radius: 999px;
+      margin-bottom: 0.8rem;
+      border: 1px solid rgba(155,191,86,0.16);
+    }
+
+    .quote {
+      padding: 1.4rem;
+      border-left: 4px solid #88ab4c;
+      background: rgba(7,20,15,0.45);
+      border-radius: 0 16px 16px 0;
+      color: #e4efe5;
+      backdrop-filter: blur(6px);
+    }
+
+    .footer {
+      padding: 3rem 0 4rem;
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+
+    .footer-bar {
+      display: flex;
+      justify-content: space-between;
+      gap: 1rem;
+      flex-wrap: wrap;
+      padding-top: 1.2rem;
+      border-top: 1px solid rgba(255,255,255,0.08);
+    }
+
+    @media (max-width: 920px) {
+      .hero-grid,
+      .grid-3,
+      .grid-2 {
+        grid-template-columns: 1fr;
+      }
+
+      .hero {
+        padding-top: 4rem;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .nav {
+        padding: 0.8rem 0;
+        align-items: flex-start;
+        flex-direction: column;
+      }
+
+      h1 {
+        font-size: 2.4rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <div class="container nav">
+      <a href="#top" class="brand">ALTHARYS <span>- Seconde Vie</span></a>
+      <nav class="nav-links">
+        <a href="#a-propos">À propos</a>
+        <a href="#lire">Lire</a>
+        <a href="#univers">Univers</a>
+        <a href="#news">Actualités</a>
+        <a href="#liens">Liens</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="top">
+    <section class="hero">
+      <div class="container hero-grid">
+        <div>
+          <div class="eyebrow">Web novel fantasy · Isekai · Site officiel</div>
+          <h1>Une seconde vie à conquérir, dans un monde qui ne l'attendait pas.</h1>
+          <p>
+            Bienvenue sur le site d'<strong>Altharys - Seconde Vie</strong>. Réincarné dans un corps qui n’est plus humain, Kael grandit au cœur d’une jungle isolée. Il y apprend à survivre, à tisser des liens, à se construire, loin de tout ce qu’il a connu sur Terre. Mais la jungle n’est pas un monde fermé. Quelque part, au-delà des arbres, autre chose existe.
+          </p>
+          <div class="button-row">
+            <a class="btn btn-primary" href="https://www.wattpad.com/story/406416505-altharys-seconde-vie" target="_blank" rel="noopener noreferrer">Commencer la lecture</a>
+            <a class="btn btn-secondary" href="#univers">Découvrir l'univers</a>
+          </div>
+        </div>
+
+        <aside class="hero-card">
+          <img class="hero-logo" src="images/logo-altharys.png" alt="Logo Altharys - Seconde Vie" />
+        </aside>
+      </div>
+    </section>
+
+    <section id="a-propos">
+      <div class="container">
+        <div class="section-title">
+          <div>
+            <h2>À propos</h2>
+            <p>Le cœur du projet, son ton, et pourquoi ce site existe.</p>
+          </div>
+        </div>
+        <div class="grid-2">
+          <article class="card">
+            <h3>Le projet</h3>
+            <p>
+              <strong>Altharys - Seconde Vie</strong> est une web novel fantasy centrée sur la reconstruction, l’aventure, les liens et la découverte progressive d’un monde plus vaste qu’il n’y paraît. Ce site sert de point d’entrée clair pour découvrir le récit et suivre son évolution.
+            </p>
+          </article>
+          <article class="card">
+            <h3>L'objectif du site</h3>
+            <p>
+              Offrir à <strong>Altharys</strong> un espace plus personnel que les plateformes de publication : une vitrine sobre, immersive et facile à consulter, où lecteurs curieux et lecteurs déjà présents peuvent retrouver l’essentiel en un seul endroit.
+            </p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="lire">
+      <div class="container">
+        <div class="section-title">
+          <div>
+            <h2>Lire l'histoire</h2>
+            <p>Les points d'entrée principaux pour commencer ou reprendre la lecture.</p>
+          </div>
+        </div>
+
+        <div class="grid-3">
+          <article class="chapter-card">
+            <span class="meta">Début</span>
+            <h3><a href="https://www.wattpad.com/story/406416505-altharys-seconde-vie" target="_blank" rel="noopener noreferrer">Commencer au chapitre 1</a></h3>
+            <p>Le point d’entrée idéal pour découvrir Kael, ses premiers pas dans cette seconde vie et les bases du monde d’Altharys.</p>
+          </article>
+
+          <article class="chapter-card">
+            <span class="meta">Arc 1</span>
+            <h3>Éveil dans la jungle</h3>
+            <p>Le premier grand mouvement du récit : la jungle, la survie, les liens, l’enfance de Kael et l’attachement progressif à ce nouveau monde.</p>
+          </article>
+
+          <article class="chapter-card">
+            <span class="meta">Plateformes</span>
+            <h3>Plateformes de lecture</h3>
+            <p><a href="https://www.wattpad.com/story/406416505-altharys-seconde-vie" target="_blank" rel="noopener noreferrer">Wattpad</a><br /><a href="https://www.mangadraft.com/light-novel/altharys-seconde-vie/summary" target="_blank" rel="noopener noreferrer">MangaDraft</a></p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="univers">
+      <div class="container">
+        <div class="section-title">
+          <div>
+            <h2>Univers</h2>
+            <p>Un aperçu simple et accessible pour donner envie sans noyer les nouveaux lecteurs.</p>
+          </div>
+        </div>
+
+        <div class="grid-3">
+          <article class="card">
+            <h3><a href="kael.html">Kael</a></h3>
+            <p>Réincarné dans un corps qui n’est plus humain, Kael grandit loin de la Terre et doit apprendre à vivre, à aimer et à se construire dans une réalité totalement nouvelle.</p>
+          </article>
+          <article class="card">
+            <h3>Altharys</h3>
+            <p>Un monde de fantasy vivant, vaste et mystérieux, dont la jungle n’est qu’un premier seuil. Au-delà, d’autres peuples, territoires, croyances et conflits attendent d’être découverts.</p>
+          </article>
+          <article class="card">
+            <h3>Les arcs</h3>
+            <p>Le récit progresse par grandes étapes de vie, en laissant une place importante au quotidien, aux attachements, à l’exploration et à l’évolution personnelle de Kael.</p>
+          </article>
+        </div>
+
+        <div style="margin-top: 1rem;" class="quote">
+          « Altharys n’est pas seulement une histoire de réincarnation. C’est une histoire de place à trouver, de liens à bâtir et de monde à découvrir. »
+        </div>
+      </div>
+    </section>
+
+    <section id="news">
+      <div class="container">
+        <div class="section-title">
+          <div>
+            <h2>Actualités</h2>
+            <p>Une zone pour annoncer les nouveaux chapitres, les illustrations, les avancées et les prochaines publications.</p>
+          </div>
+        </div>
+
+        <div class="grid-2">
+          <article class="news-card">
+            <span class="meta">Exemple de news</span>
+            <h3>Nouveau chapitre disponible</h3>
+            <p>Annonce courte avec résumé, lien vers la lecture et éventuellement un mot sur l'avancée du projet.</p>
+          </article>
+          <article class="news-card">
+            <span class="meta">Exemple de news</span>
+            <h3>Nouvelle illustration ou concept</h3>
+            <p>Idéal pour donner de la vie au site et montrer qu'Altharys continue d'évoluer en dehors des seules publications de chapitres.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="liens">
+      <div class="container">
+        <div class="section-title">
+          <div>
+            <h2>Liens & réseaux</h2>
+            <p>Tout ce qu'il faut pour suivre le projet, le lire et rester connecté à son évolution.</p>
+          </div>
+        </div>
+
+        <div class="grid-3">
+          <article class="link-card">
+            <h3>Lecture</h3>
+            <p><a href="https://www.wattpad.com/story/406416505-altharys-seconde-vie" target="_blank" rel="noopener noreferrer">Wattpad</a><br /><a href="https://www.mangadraft.com/light-novel/altharys-seconde-vie/summary" target="_blank" rel="noopener noreferrer">MangaDraft</a></p>
+          </article>
+          <article class="link-card">
+            <h3>Réseaux</h3>
+            <p><a href="https://x.com/berthe14200" target="_blank" rel="noopener noreferrer">Twitter / X</a><br /><a href="https://www.instagram.com/cr00shi/" target="_blank" rel="noopener noreferrer">Instagram</a></p>
+          </article>
+          <article class="link-card">
+            <h3>Contact</h3>
+            <p>Une section contact ou une adresse dédiée pourra être ajoutée dans une prochaine version du site.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container footer-bar">
+      <div>© 2026 Altharys - Seconde Vie</div>
+      <div>Site personnel de présentation du projet</div>
+    </div>
+  </footer>
+</body>
+</html>
