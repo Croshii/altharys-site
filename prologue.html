@@ -1,0 +1,729 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Prologue — Altharys - Seconde Vie</title>
+  <meta name="description" content="Lire le prologue d'Altharys - Seconde Vie." />
+  <style>
+    :root {
+      --bg: #07110d;
+      --panel: rgba(7, 18, 14, 0.78);
+      --panel-strong: rgba(5, 14, 11, 0.9);
+      --border: rgba(170, 220, 190, 0.12);
+      --text: #eef6ee;
+      --muted: #c9d9cf;
+      --accent: #93b857;
+      --accent-soft: rgba(147,184,87,0.14);
+      --shadow: 0 20px 50px rgba(0,0,0,0.35);
+      --radius: 24px;
+      --max: 1160px;
+      --reading-width: 760px;
+
+      --city-opacity: 1;
+      --limbo-opacity: 0;
+      --jungle-opacity: 0;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      margin: 0;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      color: var(--text);
+      background: #040806;
+      line-height: 1.8;
+      overflow-x: hidden;
+    }
+
+    a { color: inherit; text-decoration: none; }
+
+    .site-header {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      backdrop-filter: blur(10px);
+      background: rgba(4, 9, 7, 0.82);
+      border-bottom: 1px solid rgba(170,220,190,0.08);
+    }
+
+    .container {
+      width: min(calc(100% - 2rem), var(--max));
+      margin: 0 auto;
+    }
+
+    .nav {
+      min-height: 74px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+    }
+
+    .brand {
+      font-weight: 800;
+      letter-spacing: 0.04em;
+      font-size: 1.05rem;
+    }
+
+    .brand span {
+      color: var(--accent);
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+      color: var(--muted);
+    }
+
+    .nav-links a:hover,
+    .nav-links a:focus-visible,
+    .back-link:hover,
+    .back-link:focus-visible {
+      color: var(--text);
+    }
+
+    .reading-page {
+      position: relative;
+      min-height: 100vh;
+      isolation: isolate;
+    }
+
+    .reading-bg {
+      position: fixed;
+      inset: 0;
+      z-index: -3;
+      overflow: hidden;
+      background: #040806;
+    }
+
+    .bg-layer {
+      position: absolute;
+      inset: 0;
+      background-position: center;
+      background-size: cover;
+      background-repeat: no-repeat;
+      transition: opacity 0.28s linear;
+      transform: scale(1.03);
+    }
+
+    .bg-city {
+      background-image: url("images/prologue-city.jpg");
+      opacity: var(--city-opacity);
+    }
+
+    .bg-limbo {
+      background-image: url("images/prologue-limbo.jpg");
+      opacity: var(--limbo-opacity);
+    }
+
+    .bg-jungle {
+      background-image: url("images/prologue-jungle.jpg");
+      opacity: var(--jungle-opacity);
+    }
+
+    .bg-overlay {
+      position: absolute;
+      inset: 0;
+      z-index: 2;
+      background:
+        linear-gradient(90deg, rgba(4,8,6,0.9) 0%, rgba(4,8,6,0.45) 18%, rgba(4,8,6,0.15) 30%, rgba(4,8,6,0.15) 70%, rgba(4,8,6,0.45) 82%, rgba(4,8,6,0.9) 100%),
+        linear-gradient(180deg, rgba(4,8,6,0.88) 0%, rgba(4,8,6,0.45) 18%, rgba(4,8,6,0.2) 38%, rgba(4,8,6,0.2) 62%, rgba(4,8,6,0.55) 82%, rgba(4,8,6,0.9) 100%);
+      pointer-events: none;
+    }
+
+    .page-hero {
+      padding: 3.2rem 0 1.2rem;
+    }
+
+    .back-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.45rem;
+      color: var(--muted);
+      margin-bottom: 1rem;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.45rem 0.9rem;
+      border-radius: 999px;
+      background: rgba(147,184,87,0.14);
+      border: 1px solid rgba(147,184,87,0.22);
+      color: #d8efaf;
+      font-size: 0.85rem;
+      margin-bottom: 1rem;
+    }
+
+    h1, h2, h3, p { margin-top: 0; }
+
+    h1 {
+      font-size: clamp(2.2rem, 4vw, 4rem);
+      line-height: 1.08;
+      margin-bottom: 0.8rem;
+    }
+
+    .lead {
+      color: var(--muted);
+      max-width: 70ch;
+      margin-bottom: 0;
+    }
+
+    .reading-shell {
+      width: min(calc(100% - 2rem), var(--max));
+      margin: 0 auto;
+      padding: 0 0 4rem;
+    }
+
+    .reading-layout {
+      display: flex;
+      justify-content: center;
+    }
+
+    .reading-column {
+      width: min(100%, var(--reading-width));
+      background: linear-gradient(180deg, rgba(7,18,14,0.8), rgba(7,18,14,0.88));
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(10px);
+      overflow: hidden;
+    }
+
+    .reading-intro {
+      padding: 1.4rem 1.4rem 1rem;
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+      background: rgba(255,255,255,0.02);
+    }
+
+    .reading-intro h2 {
+      font-size: 1.2rem;
+      margin-bottom: 0.55rem;
+    }
+
+    .reading-intro p {
+      color: var(--muted);
+      margin: 0;
+    }
+
+    .story-section {
+      padding: 2rem 1.4rem;
+      position: relative;
+    }
+
+    .story-section + .story-section {
+      border-top: 1px solid rgba(255,255,255,0.06);
+    }
+
+    .section-label {
+      display: inline-flex;
+      align-items: center;
+      min-height: 34px;
+      padding: 0 0.8rem;
+      border-radius: 999px;
+      font-size: 0.84rem;
+      font-weight: 700;
+      letter-spacing: 0.02em;
+      margin-bottom: 1rem;
+      color: #d8efaf;
+      background: rgba(147,184,87,0.14);
+      border: 1px solid rgba(147,184,87,0.18);
+    }
+
+    .section-label.limbo {
+      color: #eadcff;
+      background: rgba(155,120,205,0.14);
+      border-color: rgba(155,120,205,0.22);
+    }
+
+    .section-label.jungle {
+      color: #d8efaf;
+      background: rgba(100,168,88,0.14);
+      border-color: rgba(100,168,88,0.22);
+    }
+
+    .story-text p {
+      margin: 0 0 1.1rem;
+      font-size: 1.03rem;
+      color: var(--text);
+    }
+
+    .story-text p:last-child {
+      margin-bottom: 0;
+    }
+
+    .story-text .break {
+      margin: 1.5rem 0;
+      text-align: center;
+      color: rgba(255,255,255,0.5);
+      letter-spacing: 0.3em;
+    }
+
+    .platform-box {
+      padding: 1.4rem;
+      border-top: 1px solid rgba(255,255,255,0.06);
+      background: rgba(255,255,255,0.02);
+    }
+
+    .platform-box h3 {
+      font-size: 1.15rem;
+      margin-bottom: 0.35rem;
+    }
+
+    .platform-box p {
+      color: var(--muted);
+      margin-bottom: 1rem;
+    }
+
+    .button-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.85rem;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 46px;
+      padding: 0 1.1rem;
+      border-radius: 999px;
+      border: 1px solid transparent;
+      font-weight: 700;
+      transition: transform 0.18s ease, border-color 0.18s ease, background 0.18s ease;
+    }
+
+    .btn:hover,
+    .btn:focus-visible {
+      transform: translateY(-1px);
+    }
+
+    .btn-primary {
+      background: linear-gradient(180deg, #88ab4c, #6f8f3e);
+      color: #f5f9ed;
+      box-shadow: 0 10px 25px rgba(96, 133, 48, 0.28);
+    }
+
+    .btn-secondary {
+      background: rgba(7,20,15,0.38);
+      border-color: rgba(170,220,190,0.12);
+      color: var(--text);
+      backdrop-filter: blur(8px);
+    }
+
+    .footer-space {
+      height: 2rem;
+    }
+
+    @media (max-width: 760px) {
+      .page-hero {
+        padding-top: 2.4rem;
+      }
+
+      .story-section,
+      .reading-intro,
+      .platform-box {
+        padding-left: 1rem;
+        padding-right: 1rem;
+      }
+
+      .nav {
+        padding: 0.8rem 0;
+        flex-direction: column;
+        align-items: flex-start;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="reading-page">
+    <div class="reading-bg">
+      <div class="bg-layer bg-city"></div>
+      <div class="bg-layer bg-limbo"></div>
+      <div class="bg-layer bg-jungle"></div>
+      <div class="bg-overlay"></div>
+    </div>
+
+    <header class="site-header">
+      <div class="container nav">
+        <a href="index.html" class="brand">ALTHARYS <span>- Seconde Vie</span></a>
+        <nav class="nav-links">
+          <a href="index.html#a-propos">À propos</a>
+          <a href="index.html#lire">Lire</a>
+          <a href="index.html#univers">Univers</a>
+          <a href="index.html#news">Actualités</a>
+          <a href="index.html#liens">Liens</a>
+        </nav>
+      </div>
+    </header>
+
+    <main>
+      <section class="page-hero">
+        <div class="container">
+          <a class="back-link" href="index.html#lire">← Retour à la lecture</a>
+          <div class="eyebrow">Lecture sur le site · Prologue</div>
+          <h1>Prologue — Ceux qui volaient dans le ciel</h1>
+          <p class="lead">
+            Le tout début d’Altharys. Une entrée en matière entre grisaille terrestre, passage dans l’inconnu, puis renaissance au cœur d’un autre monde.
+          </p>
+        </div>
+      </section>
+
+      <section class="reading-shell">
+        <div class="reading-layout">
+          <article class="reading-column">
+
+            <div class="reading-intro">
+              <h2>Lecture du prologue</h2>
+              <p>
+                Tu peux lire ici le prologue directement sur le site. Ensuite, tu peux poursuivre la lecture sur la plateforme de ton choix.
+              </p>
+            </div>
+
+            <!-- PHASE 1 : VILLE -->
+            <section class="story-section" data-phase="city">
+              <div class="section-label">Ville</div>
+              <div class="story-text">
+                <p><strong>Prologue — Ceux qui volaient dans le ciel</strong></p>
+
+                <p>C’est marrant.</p>
+                <p>Le premier souvenir de mon ancienne vie…</p>
+                <p>Ce n’est pas un drame.<br />Pas un cri.<br />Pas un moment héroïque.</p>
+                <p>Non.</p>
+                <p>Juste des avions.</p>
+                <p>Ceux qui passaient au-dessus de la maison, toujours dans le même sens.</p>
+                <p>J’habitais près d’un petit aéroport.<br />Rien de glorieux.<br />Mais chaque jour, presque à la même heure, les appareils traversaient le ciel du quartier.</p>
+                <p>Le vrombissement étouffé, le sifflement grave…<br />C’était devenu un bruit familier.</p>
+                <p>Ma chambre donnait sur le ciel.<br />Une petite lucarne carrée dans un mur décrépit.<br />Je passais des heures à regarder dehors, couché sur le dos, les mains croisées derrière la tête.</p>
+                <p>J’attendais.<br />Un avion… deux… parfois trois.</p>
+                <p>J’essayais de deviner où ils allaient :<br />Peut-être l’Espagne.<br />Peut-être Paris.<br />Peut-être nulle part.</p>
+                <p>Je me disais qu’il devait y avoir des gens à l’intérieur :<br />des gosses excités par leur premier vol,<br />des hommes d’affaires trop fatigués pour regarder par le hublot,<br />des couples qui se disputaient en silence…</p>
+                <p>Et moi, en bas, je les regardais passer.</p>
+                <p>Ce n’était pas de la jalousie.<br />C’était plus… une curiosité triste.<br />Une sorte de prière muette.</p>
+                <p>J’aurais aimé que l’un d’eux s’arrête, me voie, m’embarque.<br />Qu’un jour, y’en ait un qui ne redescende rien que pour moi.</p>
+                <p>C’est con, hein ?</p>
+                <p>Mais c’est ça, mon premier souvenir :<br />pas un visage, pas un mot…<br />juste du métal qui fend le ciel<br />et un gamin plein d’espoir dans les yeux.</p>
+                <p>Je crois que ça m’allait bien, à l’époque :<br />regarder les choses passer.<br />Les avions, les jours, les gens.</p>
+                <p>Sans faire partie du voyage.</p>
+                <p>Juste… être là.</p>
+
+                <p>Ma maison…</p>
+                <p>De l’extérieur, elle devait avoir l’air normale.<br />Une façade beige un peu sale, un jardin qui essayait d’exister entre trois mauvaises herbes, des volets qui grinçaient quand il y avait du vent.</p>
+                <p>Une maison comme on en voit partout.<br />Une maison qui ne disait rien.</p>
+                <p>Dedans, c’était pareil.</p>
+                <p>Mon père bricolait. Tout le temps.<br />Pas pour réparer quelque chose — ça non.<br />Il bricolait des choses qui ne servaient à rien :<br />un moteur démonté sur la table du salon,<br />des câbles coupés,<br />des outils posés n’importe où.</p>
+                <p>Il ne parlait pas beaucoup.</p>
+                <p>Ma mère, elle, ne bricolait rien.<br />Elle passait la plupart de son temps assise sur le vieux canapé, une couverture sur les jambes, même l’été.<br />Elle regardait la télé sans vraiment la regarder.<br />Ou alors elle fixait le mur.</p>
+                <p>Elle soupirait souvent.<br />Pas triste.<br />Pas énervée.<br />Juste… fatiguée d’être là.</p>
+                <p>On était trois dans cette maison,<br />mais on vivait comme trois ombres dans trois pièces différentes.</p>
+                <p>On ne se disputait pas.<br />On ne parlait pas fort.<br />Il n’y avait pas de violence spectaculaire, pas de cris, pas d’assiettes cassées.</p>
+                <p>Il n’y avait rien.</p>
+                <p>Juste un silence épais, collé dans l’air comme la poussière qui volait dans la lumière du matin.</p>
+                <p>Parfois, mon père disait :<br />— Passe-moi la clé de 12.</p>
+                <p>C’était presque un “je t’aime”.</p>
+                <p>Parfois, ma mère disait :<br />— Tu rentres manger ?</p>
+                <p>Ce n’était pas une vraie question.<br />Juste un automatisme du corps, comme respirer.</p>
+                <p>Et moi, au milieu de tout ça, je me suis fait petit.<br />Pas volontairement.</p>
+                <p>Juste… naturellement.</p>
+                <p>Quand personne ne te regarde, tu finis par te faire oublier toi-même.</p>
+                <p>Je crois que mes parents m’aimaient, à leur manière.<br />Pas d’une manière brillante.<br />Pas d’une manière chaude.<br />Une manière usée.<br />Comme un vêtement qu’on garde parce qu’on l’a toujours eu, même si on ne s’en sert plus.</p>
+                <p>Je ne leur en veux pas.<br />J’ai appris à grandir dans le silence.</p>
+                <p>Et le silence, ça laisse beaucoup de place pour penser.</p>
+                <p>Trop, peut-être.</p>
+
+                <p>J’ai été à l’école.<br />Pas longtemps, pas brillamment, mais j’y ai été.</p>
+                <p>Je me souviens des couloirs qui sentaient le plastique brûlé et la sueur séchée.<br />Des sonneries trop fortes, des rires trop loin.</p>
+                <p>Je n’étais pas un souffre-douleur.<br />Ni une star.</p>
+                <p>J’étais l’autre.<br />Celui du fond.<br />Celui qu’on oublie de cocher sur les listes.</p>
+                <p>J’avais des potes, parfois.<br />Des camarades de table, de cantine, de trajets.<br />Mais dès que je sortais du cadre, j’existais plus.</p>
+                <p>Je ne parlais pas beaucoup.<br />Je me contentais d’écouter.<br />Je n’avais rien à raconter.<br />Ou peut-être que je pensais que personne n’écoutait.</p>
+                <p>Parfois, y’en avait un qui me demandait si je voulais venir traîner après les cours.<br />Je disais ouais.<br />Je venais.<br />Je restais en retrait.</p>
+                <p>Et puis la fois d’après, ils oubliaient de me proposer.</p>
+                <p>Ce n’était pas qu’ils étaient méchants.<br />Juste que je n’étais pas marquant.</p>
+                <p>Je rendais mes devoirs à moitié faits.<br />Les profs me jetaient un œil, hésitaient à me gronder, et passaient au suivant.<br />On m’a dit que j’étais “gentil”.<br />Que j’avais “du potentiel”.</p>
+                <p>Mais personne ne me demandait vraiment ce que je voulais faire plus tard.<br />Moi non plus, d’ailleurs.</p>
+                <p>Ce que je voulais faire ?<br />Je ne savais pas.<br />Exister, peut-être.<br />Avoir une raison de me lever le matin.<br />Être attendu quelque part.</p>
+                <p>Mais personne ne m’attendait.<br />Ni à la maison,<br />Ni dans la cour,<br />ni même dans ma propre tête.</p>
+
+                <p>Je suis parti à dix-sept ans.<br />Pas avec fracas.<br />Pas en claquant la porte.<br />J’ai juste glissé entre les murs comme un courant d’air.</p>
+                <p>Y’avait rien à voler.<br />Rien à dire.<br />Pas de valise, pas de lettre.</p>
+                <p>Juste un sac à dos,<br />Et cette sensation discrète mais tenace<br />D’être déjà trop vieux pour cet endroit.</p>
+                <p>Mes parents ?<br />Ils dormaient.<br />Ou faisaient semblant.</p>
+                <p>Peut-être qu’ils savaient.<br />Peut-être qu’ils s’en fichaient.</p>
+                <p>En tout cas…<br />Y’a pas eu de cris.<br />Pas de course dans les escaliers.<br />Pas de larmes.</p>
+                <p>Je crois qu’ils savaient depuis longtemps que je finirais par me barrer.<br />Et moi… j’étais déjà ailleurs depuis des années.</p>
+                <p>Je regardais le plafond de ma chambre comme une prison à ciel ouvert.<br />J’écoutais les avions passer et je me disais :<br />là-haut, y’a des gens qui vont quelque part.</p>
+                <p>Moi, j’allais nulle part.<br />Mais au moins, j’y allais de mon plein gré.</p>
+
+                <p>J’ai dormi sur des canapés.<br />Sur des bancs.<br />Dans des halls d’immeubles.<br />Chez un pote un soir.<br />Chez personne le lendemain.</p>
+                <p>Je m’étais dit que j’allais rebondir.<br />Trouver un taf, n’importe quoi.</p>
+                <p>Mais je n’avais pas fini l’école.<br />Pas de diplôme.<br />Pas de réseau.<br />Rien qu’un prénom qu’on oublie<br />Et une gueule qui se mélange aux autres.</p>
+                <p>Et pourtant… à ce moment-là,<br />Je croyais encore que ça allait aller.</p>
+                <p>Que c’était juste une phase.<br />Un détour avant le vrai départ.</p>
+                <p>Mais en réalité…<br />C’était déjà le début de la fin.</p>
+
+                <p>C’est bizarre à dire,<br />Mais on ne tombe pas d’un coup.<br />On glisse.<br />On glisse lentement.</p>
+                <p>Je n’ai pas atterri à la rue comme dans un film,<br />Sous la pluie battante,<br />Avec une valise déchirée.</p>
+                <p>Non.</p>
+                <p>J’ai juste… disparu.<br />Petit à petit.</p>
+                <p>Les gens qui me connaissaient ont arrêté de m’écrire.<br />Les gens que je croisais ont arrêté de me voir.</p>
+                <p>Je suis devenu ce type que tu évites du regard dans le métro.<br />Celui qui squatte un coin de parc avec un sac trop lourd.<br />Celui qui ne sourit plus quand tu lui parles,<br />Parce qu’il a oublié comment on fait.</p>
+                <p>Je faisais de mon mieux pour garder la face.<br />Pour rester propre.<br />Pour pas trop sentir.<br />Pour éviter les regards en coin.</p>
+                <p>Mais au fond…<br />je me sentais déjà plus vraiment humain.</p>
+                <p>Juste en pause.<br />Mis de côté.</p>
+                <p>Je traînais dans des endroits où la lumière ne va plus.<br />Des souterrains.<br />Des recoins.<br />Des parkings ouverts la nuit.<br />Des arrière-cours.<br />Des toits déserts.</p>
+                <p>Je tapais à la porte des associations, parfois.<br />On me donnait un repas chaud.<br />Un sourire poli.<br />Mais jamais un regard qui disait :<br />« Toi, tu vas t’en sortir. »</p>
+                <p>Je n’étais pas un criminel.<br />Pas un toxico.<br />Pas un malade.</p>
+                <p>Juste un type ordinaire…<br />Qui n’avait plus de place nulle part.</p>
+                <p>Et plus le temps passait,<br />Plus je devenais invisible.</p>
+                <p>Un fantôme en survêtement,<br />Avec des rêves crevés au fond des poches.</p>
+                <p>Je me suis mis à parler tout seul, parfois.<br />À penser à voix haute.<br />À discuter avec des pigeons,<br />Des murs,<br />Ma propre ombre.</p>
+                <p>Tu sais que t’as touché le fond<br />Quand tu te surprends à sourire à ton reflet dans une flaque.</p>
+                <p>Mais le pire…<br />Ce n’est pas le froid.<br />Ce n’est pas la faim.</p>
+                <p>C’est le silence.</p>
+                <p>Celui qu’on t’impose.<br />Celui où plus personne ne t’appelle par ton prénom.</p>
+                <p>À force…<br />j’avais moi-même oublié comment il sonnait.</p>
+
+                <p>Mais la vie, elle, n’oublie jamais de te rappeler où tu en es.</p>
+                <p>Je m’en souviens comme si c’était hier.<br />Pas parce qu’il s’est passé un truc spectaculaire.</p>
+                <p>Mais justement parce que…<br />C’était un jour comme les autres.</p>
+                <p>Un jour banal.<br />Gris.<br />Vide.</p>
+                <p>Le genre de journée qui ne t’épuise rien qu’à la regarder dans les yeux.</p>
+                <p>J’avais passé la nuit près d’un local à poubelles.<br />Le sol était gelé.<br />Mon dos me faisait mal.<br />Mon estomac grognait,<br />Mais j’avais appris à l’ignorer depuis longtemps.</p>
+                <p>J’ai marché sans but, comme d’habitude.<br />Je connaissais la ville par cœur à force de l’arpenter.<br />Chaque recoin.<br />Chaque boutique.<br />Chaque banc sur lequel on me chassait dès que je fermais les yeux.</p>
+                <p>Je suis passé devant un café.<br />Les gens riaient à l’intérieur.<br />Un anniversaire, peut-être ?</p>
+                <p>Il y avait des gâteaux, des ballons,<br />de la musique étouffée par les vitres.</p>
+                <p>Et moi… là, dehors.<br />Avec mes chaussures trouées<br />Et mes mains enfoncées dans les poches<br />Comme si je voulais disparaître dedans.</p>
+                <p>Puis il a commencé à pleuvoir.<br />Pas fort.<br />Juste assez pour tremper jusqu’à l’os,<br />Sans prévenir.</p>
+                <p>Je n’ai pas couru.<br />Je n’ai pas râlé.<br />J’ai juste continué à marcher.</p>
+                <p>C’est là que je l’ai vu.</p>
+                <p>Un type, à un arrêt de bus.<br />Il me fixait.<br />Pas avec haine.<br />Pas avec peur.</p>
+                <p>Avec ce mépris froid.</p>
+                <p>Le genre de regard qui dit :<br />« T’es rien. »</p>
+                <p>Je crois que c’est à ce moment-là<br />Que quelque chose s’est brisé en moi.</p>
+                <p>J’ai eu envie de hurler.<br />De frapper.<br />De pleurer.</p>
+                <p>Mais je n’ai rien fait.<br />J’ai juste détourné les yeux.</p>
+                <p>Et j’ai compris.</p>
+                <p>Ce jour-là,<br />J’en avais marre.<br />Plus qu’assez.</p>
+                <p>De tout.<br />De cette ville.<br />De ce corps.<br />De cette vie.</p>
+                <p>Pas de drame.<br />Pas de grand discours intérieur.</p>
+                <p>Juste un point de rupture.</p>
+                <p>C’était le jour de trop.</p>
+
+                <p>C’était en fin d’après-midi.<br />La pluie avait cessé, mais tout brillait encore, comme si la ville essayait de se faire belle après t’avoir marché dessus.<br />Je marchais sans penser.<br />Pas d’objectif.<br />Pas d’espoir.<br />Juste mes pas, l’un après l’autre, sur l’asphalte mouillé.</p>
+                <p>Puis j’ai entendu quelque chose.<br />Un cri.<br />Court.<br />Sec.<br />Un de ceux qu’on n’oublie pas.</p>
+                <p>J’ai tourné la tête.<br />Une ruelle.<br />Un gamin. Douze ans ? Peut-être moins.<br />Coincé contre un mur par deux types que je connaissais vaguement de vue.<br />Des gars comme moi. Paumés. Fatigués. Affamés de n’importe quoi qui pourrait les faire se sentir un peu plus grands.</p>
+                <p>L’un avait un couteau.<br />Un vrai.<br />Pas une menace en l’air.</p>
+                <p>Au début, je n’ai rien ressenti.<br />Juste une lassitude lourde.<br />Parce que je savais exactement où menait ce genre de scène.<br />Toujours au même endroit.</p>
+                <p>Et pourtant… j’y suis allé.<br />Je crois que même aujourd’hui, je ne comprends pas vraiment pourquoi.</p>
+                <p>— Vous en êtes vraiment là… à deux contre un gamin ?</p>
+                <p>Ils se sont retournés.<br />Leurs yeux disaient “casse-toi”.<br />Les miens devaient dire “je n’ai plus rien à perdre”.</p>
+                <p>J’ai frappé le premier.<br />Mauvais choix.<br />Mauvais angle.<br />Mauvais réflexe.</p>
+                <p>J’ai senti la lame avant de la voir.<br />Pas un cri.<br />Juste… chaud.<br />Comme une brûlure, mais à l’intérieur.</p>
+                <p>J’ai baissé les yeux.<br />Du rouge. Beaucoup.<br />Partout.</p>
+                <p>Mes jambes ont lâché.<br />Le gamin a couru.<br />Les deux types aussi.<br />Moi, je suis resté.</p>
+                <p>Je me suis retrouvé assis, puis couché, sur le trottoir.<br />Les pierres étaient froides dans mon dos.<br />Le ciel était gris.<br />Calme.<br />Étrangement calme.</p>
+                <p>J’ai respiré.<br />Une fois.<br />Deux fois.<br />Puis plus rien ne venait.</p>
+                <p>Pas de regret.<br />Pas de dernière pensée dramatique.<br />Pas de défilé de souvenirs.</p>
+                <p>Juste une phrase qui m’a traversé l’esprit, légère, presque posée :</p>
+                <p>« C’est comme ça que ça devait finir, hein ? »</p>
+                <p>Et puis…<br />Le monde s’est vidé.<br />Du son.<br />De la lumière.<br />Du poids.</p>
+                <p>Il n’y avait plus la rue.<br />Plus la ville.<br />Plus moi.</p>
+                <p>Seulement le noir.<br />Un noir vaste.<br />Profond.<br />Silencieux.</p>
+                <p class="break">Puis—</p>
+              </div>
+            </section>
+
+            <!-- PHASE 2 : ENTRE-DEUX -->
+            <section class="story-section" data-phase="limbo">
+              <div class="section-label limbo">Entre-deux</div>
+              <div class="story-text">
+                <p>Un souffle.<br />Un battement.<br />Et quelque chose comme… un écho.</p>
+                <p>Je ne suis pas parti.<br />J’ai glissé.</p>
+                <p class="break">Puis—</p>
+                <p>Une vibration.</p>
+                <p>Comme si mon corps reprenait son souffle…</p>
+                <p>Mais aucun son ne sortait.</p>
+                <p>Je suis où, là ?</p>
+                <p>Autour de moi, un espace… enfumé.<br />Violacé.<br />Tourbillonnant lentement en spirale.<br />Une sorte de ciel renversé, sans haut ni bas.</p>
+                <p>Mais le pire, c’était les silhouettes.</p>
+                <p>Des formes éthérées.<br />Humanoïdes.<br />Des centaines.<br />Des milliers.<br />Des milliards, peut-être.</p>
+                <p>Toutes flottaient autour de moi.</p>
+                <p>Mon regard partait dans tous les sens.<br />La panique montait.<br />Et pourtant…</p>
+                <p>Aucun bruit.<br />Pas un souffle.<br />Juste ce silence assourdissant.</p>
+                <p>Bordel… je suis où, là ?!</p>
+                <p>Je voulais crier.<br />Hurler.<br />Mais rien.</p>
+                <p>Et si je restais coincé comme ça pour l’éternité ?<br />Et si—</p>
+                <p>Non.<br />Non non non.</p>
+                <p>À l’aide !</p>
+                <p>Toujours rien.<br />Pas de réponse.<br />Pas de chaleur.</p>
+                <p>Puis la peur… a changé.<br />Elle est devenue viscérale.</p>
+                <p>Parce que les silhouettes…<br />me regardaient.</p>
+                <p>Toutes.</p>
+                <p>Même celles, là-bas, tout au fond de cet espace qui n’avait pas de fin.<br />Des yeux sans forme.<br />Fixés sur moi.</p>
+                <p>Arrêtez !<br />Je vous en supplie !<br />Je ne veux pas rester ici !</p>
+                <p>Tout allait trop vite.<br />Et en même temps, tout était figé.<br />Suspendu.</p>
+                <p>Mais je le sentais :<br />si je restais…</p>
+                <p>Je finirais comme eux.<br />Une âme flottante.<br />Un fantôme oublié.</p>
+                <p>JE VEUX VIVRE !!</p>
+                <p>J’ai hurlé.<br />Enfin… j’ai cru hurler.<br />Mais aucun son n’est sorti.</p>
+                <p>Rien.</p>
+                <p>Juste ce froid qui s’infiltrait partout, jusqu’à mes os.</p>
+                <p class="break">Puis—</p>
+                <p>Quelque chose a cédé.</p>
+                <p>Je me suis senti glisser,<br />Être tiré en arrière,</p>
+                <p>Comme un poisson arraché de l’eau.</p>
+                <p>Et le monde s’est refermé.</p>
+                <p>Noir complet.</p>
+              </div>
+            </section>
+
+            <!-- PHASE 3 : JUNGLE -->
+            <section class="story-section" data-phase="jungle">
+              <div class="section-label jungle">Jungle</div>
+              <div class="story-text">
+                <p>Puis j’ai senti que ..</p>
+                <p>L’air était lourd. Humide. Étouffant.<br />Autour de moi, des sons étranges.<br />Des grognements rauques.<br />Des cris aigus.<br />Et ce bruit… comme des mains qui frappaient sur du bois, par saccades. Plusieurs. Beaucoup.</p>
+                <p>J’ai ouvert les yeux.<br />Ma vision était trouble.<br />Tout baignait dans une lumière verte, filtrée par des feuilles immenses au-dessus de moi.<br />Puis les contours se sont précisés.</p>
+                <p>Et ce visage…</p>
+                <p>Non.<br />Ce n’était pas un visage.</p>
+                <p>C’était un museau.<br />Deux yeux jaunes, profonds, bordés d’un pelage blanc et gris.<br />Une créature me fixait, immobile, penchée sur moi. Son souffle était chaud sur ma joue.</p>
+                <p>J’ai voulu reculer, par réflexe.<br />Mais mon corps… mon corps ne répondait pas.</p>
+                <p>Mes bras étaient courts.<br />Poilus.<br />Mes mains ? De petites choses maladroites aux doigts arrondis, presque mous.</p>
+                <p>Je n’étais pas debout.<br />Ni vraiment allongé.<br />J’étais… contenu.</p>
+                <p>Elle a poussé un son grave.<br />Un grondement doux.<br />Puis m’a serré contre elle, comme pour me dire que tout allait bien.</p>
+                <p>Sa chaleur m’a enveloppé.<br />Malgré moi, ma respiration a ralenti.<br />Tout allait trop vite.<br />Je ne comprenais rien.</p>
+                <p>En bougeant un peu, j’ai senti… une queue.<br />Accrochée à moi.<br />Une foutue queue.</p>
+                <p>Mon cœur s’est emballé.<br />Je ne rêvais pas.</p>
+                <p>D’autres sons.<br />D’autres petits cris.<br />J’ai tourné légèrement la tête.</p>
+                <p>Elles n’étaient pas seules.</p>
+                <p>Trois autres femelles singes, allongées sur un tapis de feuilles et de lianes, serraient chacune un petit corps poilu contre elles.<br />Nés en même temps que moi. Tous les quatre.</p>
+                <p>L’un criait plus fort que les autres.<br />L’autre dormait déjà.<br />Le troisième essayait d’attraper sa propre main avec ses pieds.</p>
+                <p>Et moi…<br />Je fixais le ciel entre les feuillages, complètement déboussolé.</p>
+                <p>Puis la femelle qui me tenait s’est penchée un peu plus.<br />Elle a touché mon front du bout des doigts.<br />Et elle a murmuré quelque chose.</p>
+                <p>Un son.<br />Ou plutôt deux syllabes douces, arrondies :</p>
+                <p>« kaa… »<br />« ehl… »</p>
+                <p>Je ne comprenais pas.<br />Je ne pouvais pas comprendre.<br />Pour moi, à cet instant, ce n’était qu’un bruit parmi d’autres.<br />Mais il vibrait.<br />Profond.<br />Comme si ce son cherchait une place en moi.</p>
+                <p>Elle l’a répété encore, avec la même tendresse.<br />Une berceuse qui n’avait pas besoin d’être comprise pour exister.</p>
+                <p>Je ne savais pas ce que ça voulait dire.<br />Je ne savais même pas si ça voulait dire quelque chose.</p>
+                <p>Mais… elle me l’offrait.<br />Pas un mot.<br />Pas un nom.<br />Juste… quelque chose.</p>
+                <p>Une attention.<br />Une chaleur.<br />Une reconnaissance.</p>
+                <p>Et moi, je l’ai laissé entrer.<br />Parce que dans mon autre vie,<br />on ne me donnait plus rien.<br />Pas même un regard.</p>
+                <p>Ici…<br />j’existais.</p>
+                <p>Un craquement m’a fait lever les yeux.<br />Un oiseau immense — noir et blanc — passait au-dessus de la canopée, ses ailes déployées, majestueux.</p>
+                <p>J’ai eu un vertige.<br />Tout était si vivant ici.<br />Si différent.</p>
+                <p>Je suis resté là, quelques minutes. Peut-être des heures.<br />Blotti contre cette créature qui me berçait sans dire un mot.<br />À sentir son souffle.<br />À écouter les bruits de la jungle.</p>
+                <p>Puis j’ai cligné des yeux.<br />Pris une inspiration.<br />Et soudain, l’évidence m’a frappé.</p>
+                <p><strong>…Attends.<br />…Je viens de ressusciter… en singe ?!</strong></p>
+              </div>
+            </section>
+
+            <div class="platform-box">
+              <h3>Poursuivre la lecture</h3>
+              <p>Le prologue est terminé. Tu peux maintenant continuer l’histoire sur la plateforme de ton choix.</p>
+              <div class="button-row">
+                <a class="btn btn-primary" href="https://www.wattpad.com/story/406416505-altharys-seconde-vie" target="_blank" rel="noopener noreferrer">Lire sur Wattpad</a>
+                <a class="btn btn-secondary" href="https://fr.purrfiction.io/book/1408/FR/altharys-seconde-vie" target="_blank" rel="noopener noreferrer">Lire sur Purrfiction</a>
+                <a class="btn btn-secondary" href="https://nocteller.com/book/7349-altharys-seconde-vie" target="_blank" rel="noopener noreferrer">Lire sur Nocteller</a>
+              </div>
+            </div>
+
+          </article>
+        </div>
+      </section>
+
+      <div class="footer-space"></div>
+    </main>
+  </div>
+
+  <script>
+    const root = document.documentElement;
+    const sections = [...document.querySelectorAll(".story-section")];
+
+    function clamp(value, min, max) {
+      return Math.max(min, Math.min(max, value));
+    }
+
+    function setOpacities(city, limbo, jungle) {
+      root.style.setProperty("--city-opacity", city.toFixed(3));
+      root.style.setProperty("--limbo-opacity", limbo.toFixed(3));
+      root.style.setProperty("--jungle-opacity", jungle.toFixed(3));
+    }
+
+    function updateBackgrounds() {
+      const viewportMiddle = window.innerHeight * 0.5;
+
+      let activeSection = sections[0];
+      let closestDistance = Infinity;
+
+      sections.forEach(section => {
+        const rect = section.getBoundingClientRect();
+        const sectionCenter = rect.top + rect.height / 2;
+        const distance = Math.abs(sectionCenter - viewportMiddle);
+
+        if (distance < closestDistance) {
+          closestDistance = distance;
+          activeSection = section;
+        }
+      });
+
+      const rect = activeSection.getBoundingClientRect();
+      const phase = activeSection.dataset.phase;
+
+      const progress = clamp((viewportMiddle - rect.top) / rect.height, 0, 1);
+
+      let city = 0, limbo = 0, jungle = 0;
+
+      if (phase === "city") {
+        if (progress < 0.7) {
+          city = 1;
+          limbo = 0;
+          jungle = 0;
+        } else {
+          const t = (progress - 0.7) / 0.3;
+          city = 1 - t;
+          limbo = t;
+          jungle = 0;
+        }
+      }
+
+      if (phase === "limbo") {
+        if (progress < 0.5) {
+          const t = progress / 0.5;
+          city = 1 - t;
+          limbo = t;
+          jungle = 0;
+        } else {
+          const t = (progress - 0.5) / 0.5;
+          city = 0;
+          limbo = 1 - t;
+          jungle = t;
+        }
+      }
+
+      if (phase === "jungle") {
+        if (progress < 0.22) {
+          const t = progress / 0.22;
+          city = 0;
+          limbo = 1 - t;
+          jungle = t;
+        } else {
+          city = 0;
+          limbo = 0;
+          jungle = 1;
+        }
+      }
+
+      setOpacities(clamp(city, 0, 1), clamp(limbo, 0, 1), clamp(jungle, 0, 1));
+    }
+
+    updateBackgrounds();
+    window.addEventListener("scroll", updateBackgrounds, { passive: true });
+    window.addEventListener("resize", updateBackgrounds);
+  </script>
+</body>
+</html>

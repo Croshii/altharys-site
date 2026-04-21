@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Les arcs - Altharys - Seconde Vie</title>
+  <meta name="description" content="Les grands arcs narratifs d'Altharys - Seconde Vie." />
+  <style>
+    :root {
+      --bg: #07110d;
+      --bg-soft: #0d1b15;
+      --panel: rgba(8, 18, 14, 0.76);
+      --panel-strong: rgba(7, 14, 11, 0.86);
+      --border: rgba(170, 220, 190, 0.12);
+      --text: #eef6ee;
+      --muted: #c9d9cf;
+      --accent: #93b857;
+      --accent-soft: rgba(147,184,87,0.14);
+      --warning: #d9a64d;
+      --shadow: 0 20px 50px rgba(0,0,0,0.35);
+      --radius: 24px;
+      --max: 1180px;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      margin: 0;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      color: var(--text);
+      background:
+        linear-gradient(180deg, rgba(4,9,7,0.95), rgba(4,9,7,0.98)),
+        radial-gradient(circle at top, rgba(147,184,87,0.12), transparent 30%),
+        #050b08;
+      line-height: 1.6;
+    }
+
+    a { color: inherit; text-decoration: none; }
+    img { max-width: 100%; display: block; }
+
+    .container {
+      width: min(calc(100% - 2rem), var(--max));
+      margin: 0 auto;
+    }
+
+    .site-header {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      backdrop-filter: blur(10px);
+      background: rgba(4, 9, 7, 0.84);
+      border-bottom: 1px solid rgba(170,220,190,0.08);
+    }
+
+    .nav {
+      min-height: 74px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+    }
+
+    .brand {
+      font-weight: 800;
+      letter-spacing: 0.04em;
+      font-size: 1.05rem;
+    }
+
+    .brand span { color: var(--accent); }
+
+    .nav-links {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+      color: var(--muted);
+    }
+
+    .nav-links a:hover,
+    .nav-links a:focus-visible,
+    .back-link:hover,
+    .back-link:focus-visible {
+      color: var(--text);
+    }
+
+    .page-hero {
+      padding: 3.5rem 0 2rem;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.45rem 0.9rem;
+      border-radius: 999px;
+      background: rgba(147,184,87,0.14);
+      border: 1px solid rgba(147,184,87,0.22);
+      color: #d8efaf;
+      font-size: 0.85rem;
+      margin-bottom: 1rem;
+    }
+
+    .back-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.45rem;
+      color: var(--muted);
+      margin-bottom: 1rem;
+    }
+
+    h1, h2, h3, p { margin-top: 0; }
+
+    h1 {
+      font-size: clamp(2.3rem, 4vw, 4rem);
+      line-height: 1.05;
+      margin-bottom: 0.8rem;
+    }
+
+    .lead {
+      color: var(--muted);
+      max-width: 68ch;
+      margin-bottom: 0;
+    }
+
+    .arcs-list {
+      display: grid;
+      gap: 1.4rem;
+      padding: 1rem 0 4rem;
+    }
+
+    .arc-card {
+      position: relative;
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(10px);
+      overflow: hidden;
+    }
+
+    .arc-banner-wrap {
+      position: relative;
+      padding: 1.2rem 1.2rem 0;
+    }
+
+    .arc-banner-frame {
+      width: 100%;
+      height: 320px;
+      border-radius: 18px;
+      background: rgba(255,255,255,0.03);
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 1rem;
+      position: relative;
+    }
+
+    .arc-banner {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      display: block;
+    }
+
+    .arc-content {
+      padding: 1.15rem 1.2rem 1.3rem;
+    }
+
+    .arc-top {
+      display: flex;
+      gap: 0.8rem;
+      align-items: center;
+      flex-wrap: wrap;
+      margin-bottom: 0.75rem;
+    }
+
+    .meta,
+    .status-badge {
+      display: inline-flex;
+      align-items: center;
+      min-height: 34px;
+      padding: 0 0.8rem;
+      border-radius: 999px;
+      font-size: 0.84rem;
+      font-weight: 700;
+      letter-spacing: 0.02em;
+    }
+
+    .meta {
+      color: #d8efaf;
+      background: rgba(147,184,87,0.14);
+      border: 1px solid rgba(147,184,87,0.16);
+    }
+
+    .status-badge {
+      color: #fff2d4;
+      background: rgba(217,166,77,0.14);
+      border: 1px solid rgba(217,166,77,0.22);
+    }
+
+    .arc-title {
+      font-size: clamp(1.5rem, 2.4vw, 2.1rem);
+      line-height: 1.1;
+      margin-bottom: 0.65rem;
+    }
+
+    .arc-desc {
+      color: var(--muted);
+      max-width: 72ch;
+      margin-bottom: 1rem;
+    }
+
+    .actions {
+      display: flex;
+      gap: 0.8rem;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 44px;
+      padding: 0 1rem;
+      border-radius: 999px;
+      border: 1px solid transparent;
+      font-weight: 700;
+      transition: transform 0.18s ease, border-color 0.18s ease, background 0.18s ease;
+    }
+
+    .btn:hover,
+    .btn:focus-visible { transform: translateY(-1px); }
+
+    .btn-primary {
+      background: linear-gradient(180deg, #88ab4c, #6f8f3e);
+      color: #f5f9ed;
+      box-shadow: 0 10px 25px rgba(96, 133, 48, 0.28);
+    }
+
+    .btn-secondary {
+      background: rgba(7,20,15,0.38);
+      border-color: rgba(170,220,190,0.12);
+      color: var(--text);
+      backdrop-filter: blur(8px);
+    }
+
+    .locked {
+      background: linear-gradient(180deg, rgba(14,14,14,0.9), rgba(7,7,7,0.95));
+    }
+
+    .locked .arc-banner {
+      filter: blur(4px) saturate(0.85) brightness(0.72);
+      transform: scale(1.02);
+    }
+
+    .lock-overlay {
+      position: absolute;
+      inset: 1.2rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      pointer-events: none;
+      border-radius: 18px;
+      background: linear-gradient(180deg, rgba(0,0,0,0.12), rgba(0,0,0,0.28));
+    }
+
+    .lock-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+      min-height: 54px;
+      padding: 0 1.1rem;
+      border-radius: 999px;
+      background: rgba(15,15,15,0.78);
+      border: 1px solid rgba(255,255,255,0.12);
+      color: #f0f0f0;
+      backdrop-filter: blur(8px);
+      box-shadow: 0 10px 35px rgba(0,0,0,0.35);
+      font-weight: 800;
+      letter-spacing: 0.02em;
+    }
+
+    .lock-icon {
+      font-size: 1.2rem;
+      line-height: 1;
+    }
+
+    @media (max-width: 720px) {
+      .nav {
+        padding: 0.8rem 0;
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .lock-overlay {
+        inset: 1rem;
+      }
+
+      .arc-banner-wrap {
+        padding: 1rem 1rem 0;
+      }
+
+      .arc-banner-frame {
+        height: 220px;
+        padding: 0.8rem;
+      }
+
+      .arc-content {
+        padding: 1rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <div class="container nav">
+      <a href="index.html" class="brand">ALTHARYS <span>- Seconde Vie</span></a>
+      <nav class="nav-links">
+        <a href="index.html#a-propos">À propos</a>
+        <a href="index.html#lire">Lire</a>
+        <a href="index.html#univers">Univers</a>
+        <a href="index.html#news">Actualités</a>
+        <a href="index.html#liens">Liens</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="page-hero">
+      <div class="container">
+        <a class="back-link" href="index.html#univers">← Retour à l'univers</a>
+        <div class="eyebrow">Structure narrative · Grandes étapes</div>
+        <h1>Les arcs d'Altharys</h1>
+        <p class="lead">Le récit d’Altharys se construit en plusieurs grands mouvements. Chaque arc représente une étape de vie, un nouvel horizon, et une évolution du regard porté sur Kael, ses liens et le monde qui l’entoure.</p>
+      </div>
+    </section>
+
+    <section>
+      <div class="container arcs-list">
+        <article class="arc-card">
+          <div class="arc-banner-wrap">
+            <div class="arc-banner-frame">
+              <img class="arc-banner" src="images/arc-1-banner.png" alt="Bannière de l'Arc 1 - Enfance dans la jungle" />
+            </div>
+          </div>
+          <div class="arc-content">
+            <div class="arc-top">
+              <span class="meta">Prologue à chapitre 9</span>
+            </div>
+            <h2 class="arc-title">Arc 1 — Enfance dans la jungle</h2>
+            <p class="arc-desc">Les premières années de Kael dans un corps qui n’est plus humain. La jungle, l’enfance, l’apprentissage instinctif du monde, les premiers liens et le lent attachement à cette seconde vie.</p>
+            <div class="actions">
+              <a class="btn btn-primary" href="https://www.wattpad.com/story/406416505-altharys-seconde-vie" target="_blank" rel="noopener noreferrer">Lire l'arc</a>
+            </div>
+          </div>
+        </article>
+
+        <article class="arc-card">
+          <div class="arc-banner-wrap">
+            <div class="arc-banner-frame">
+              <img class="arc-banner" src="images/arc-2-banner.png" alt="Bannière de l'Arc 2 - Troupe des Carillons" />
+            </div>
+          </div>
+          <div class="arc-content">
+            <div class="arc-top">
+              <span class="meta">Arc 2</span>
+              <span class="status-badge">EN COURS D'ÉCRITURE</span>
+            </div>
+            <h2 class="arc-title">Arc 2 — Troupe des Carillons</h2>
+            <p class="arc-desc">Le voyage, la route, le spectacle, la chaleur d’un foyer ambulant et la naissance d’un nouvel ancrage humain dans la vie de Kael. Un arc de liens, de découverte et d’appartenance.</p>
+            <div class="actions">
+              <span class="btn btn-secondary">Bientôt disponible</span>
+            </div>
+          </div>
+        </article>
+
+        <article class="arc-card locked">
+          <div class="arc-banner-wrap">
+            <div class="arc-banner-frame">
+              <img class="arc-banner" src="images/arc-3-banner.png" alt="Bannière verrouillée de l'Arc 3" />
+              <div class="lock-overlay">
+                <div class="lock-badge"><span class="lock-icon">🔒</span> Prévu, mais pas encore disponible</div>
+              </div>
+            </div>
+          </div>
+          <div class="arc-content">
+            <div class="arc-top">
+              <span class="meta">Arc futur</span>
+            </div>
+            <h2 class="arc-title">Arc 3 — À venir</h2>
+            <p class="arc-desc">Les prochains grands bouleversements du récit restent encore verrouillés. Le monde d’Altharys s’ouvrira davantage, mais pas tout de suite.</p>
+          </div>
+        </article>
+      </div>
+    </section>
+  </main>
+</body>
+</html>

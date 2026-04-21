@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Auteur - Altharys - Seconde Vie</title>
+  <meta name="description" content="Page auteur d'Altharys - Seconde Vie." />
+  <style>
+    :root {
+      --bg: #07110d;
+      --bg-soft: #0d1b15;
+      --panel: rgba(8, 18, 14, 0.78);
+      --border: rgba(170, 220, 190, 0.12);
+      --text: #eef6ee;
+      --muted: #c9d9cf;
+      --accent: #93b857;
+      --shadow: 0 20px 50px rgba(0,0,0,0.35);
+      --radius: 24px;
+      --max: 1180px;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      margin: 0;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      color: var(--text);
+      background:
+        linear-gradient(180deg, rgba(4,9,7,0.95), rgba(4,9,7,0.98)),
+        radial-gradient(circle at top, rgba(147,184,87,0.12), transparent 30%),
+        #050b08;
+      line-height: 1.6;
+    }
+
+    a { color: inherit; text-decoration: none; }
+    img { max-width: 100%; display: block; }
+
+    .container {
+      width: min(calc(100% - 2rem), var(--max));
+      margin: 0 auto;
+    }
+
+    .site-header {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      backdrop-filter: blur(10px);
+      background: rgba(4, 9, 7, 0.84);
+      border-bottom: 1px solid rgba(170,220,190,0.08);
+    }
+
+    .nav {
+      min-height: 74px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+    }
+
+    .brand {
+      font-weight: 800;
+      letter-spacing: 0.04em;
+      font-size: 1.05rem;
+    }
+
+    .brand span { color: var(--accent); }
+
+    .nav-links {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+      color: var(--muted);
+    }
+
+    .nav-links a:hover,
+    .nav-links a:focus-visible,
+    .back-link:hover,
+    .back-link:focus-visible {
+      color: var(--text);
+    }
+
+    .page-hero {
+      padding: 3.5rem 0 2rem;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.45rem 0.9rem;
+      border-radius: 999px;
+      background: rgba(147,184,87,0.14);
+      border: 1px solid rgba(147,184,87,0.22);
+      color: #d8efaf;
+      font-size: 0.85rem;
+      margin-bottom: 1rem;
+    }
+
+    .back-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.45rem;
+      color: var(--muted);
+      margin-bottom: 1rem;
+    }
+
+    h1, h2, h3, p { margin-top: 0; }
+
+    h1 {
+      font-size: clamp(2.3rem, 4vw, 4rem);
+      line-height: 1.05;
+      margin-bottom: 0.8rem;
+    }
+
+    .lead {
+      color: var(--muted);
+      max-width: 66ch;
+      margin-bottom: 0;
+    }
+
+    .layout {
+      display: grid;
+      grid-template-columns: minmax(280px, 360px) 1fr;
+      gap: 1.5rem;
+      align-items: start;
+      padding: 1rem 0 4rem;
+    }
+
+    .profile-card,
+    .content-card {
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(10px);
+    }
+
+    .profile-card {
+      padding: 1.4rem;
+      position: sticky;
+      top: 92px;
+      text-align: center;
+    }
+
+    .avatar-frame {
+      width: min(100%, 240px);
+      aspect-ratio: 1 / 1;
+      margin: 0 auto 1rem;
+      border-radius: 50%;
+      overflow: hidden;
+      border: 2px solid rgba(170,220,190,0.14);
+      background: rgba(255,255,255,0.03);
+      box-shadow: 0 12px 30px rgba(0,0,0,0.28);
+    }
+
+    .avatar-frame img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .author-name {
+      font-size: 1.8rem;
+      margin-bottom: 0.35rem;
+    }
+
+    .author-role {
+      color: var(--muted);
+      margin-bottom: 1rem;
+    }
+
+    .mini-info {
+      display: grid;
+      gap: 0.7rem;
+      text-align: left;
+      margin-top: 1.2rem;
+    }
+
+    .mini-box {
+      padding: 0.9rem 1rem;
+      border-radius: 16px;
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(170,220,190,0.08);
+    }
+
+    .mini-box strong {
+      display: block;
+      margin-bottom: 0.2rem;
+      color: #eef6ee;
+    }
+
+    .mini-box span {
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+
+    .content-stack {
+      display: grid;
+      gap: 1rem;
+    }
+
+    .content-card {
+      padding: 1.25rem;
+    }
+
+    .content-card h2 {
+      font-size: 1.2rem;
+      margin-bottom: 0.7rem;
+    }
+
+    .content-card p {
+      color: var(--muted);
+      margin-bottom: 0.9rem;
+    }
+
+    .content-card p:last-child {
+      margin-bottom: 0;
+    }
+
+    .button-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.85rem;
+      margin-top: 1rem;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 46px;
+      padding: 0 1.1rem;
+      border-radius: 999px;
+      border: 1px solid transparent;
+      font-weight: 700;
+      transition: transform 0.18s ease, border-color 0.18s ease, background 0.18s ease;
+    }
+
+    .btn:hover,
+    .btn:focus-visible {
+      transform: translateY(-1px);
+    }
+
+    .btn-primary {
+      background: linear-gradient(180deg, #88ab4c, #6f8f3e);
+      color: #f5f9ed;
+      box-shadow: 0 10px 25px rgba(96, 133, 48, 0.28);
+    }
+
+    .btn-secondary {
+      background: rgba(7,20,15,0.38);
+      border-color: rgba(170,220,190,0.12);
+      color: var(--text);
+      backdrop-filter: blur(8px);
+    }
+
+    @media (max-width: 920px) {
+      .layout {
+        grid-template-columns: 1fr;
+      }
+
+      .profile-card {
+        position: static;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .nav {
+        padding: 0.8rem 0;
+        flex-direction: column;
+        align-items: flex-start;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <div class="container nav">
+      <a href="index.html" class="brand">ALTHARYS <span>- Seconde Vie</span></a>
+      <nav class="nav-links">
+        <a href="index.html#a-propos">À propos</a>
+        <a href="index.html#lire">Lire</a>
+        <a href="index.html#univers">Univers</a>
+        <a href="index.html#news">Actualités</a>
+        <a href="index.html#liens">Liens</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="page-hero">
+      <div class="container">
+        <a class="back-link" href="index.html#a-propos">← Retour au site</a>
+        <div class="eyebrow">Auteur · Projet</div>
+        <h1>Roshi</h1>
+        <p class="lead">
+          Auteur d’Altharys - Seconde Vie. Une page dédiée pour présenter la démarche du projet, son univers, et la personne qui le fait vivre au fil des publications.
+        </p>
+      </div>
+    </section>
+
+    <section>
+      <div class="container layout">
+
+        <aside class="profile-card">
+          <div class="avatar-frame">
+            <img src="images/auteur-avatar.png" alt="Avatar de Roshi" />
+          </div>
+
+          <h2 class="author-name">Roshi</h2>
+          <p class="author-role">Auteur d’Altharys - Seconde Vie</p>
+
+          <div class="mini-info">
+            <div class="mini-box">
+              <strong>Projet principal</strong>
+              <span>Altharys - Seconde Vie</span>
+            </div>
+
+            <div class="mini-box">
+              <strong>Genre</strong>
+              <span>Fantasy · Isekai · Web novel</span>
+            </div>
+
+            <div class="mini-box">
+              <strong>Publication</strong>
+              <span>Chapitre hebdomadaire</span>
+            </div>
+          </div>
+        </aside>
+
+        <div class="content-stack">
+
+          <article class="content-card">
+            <h2>À propos</h2>
+            <p>
+              Texte de présentation de l’auteur à écrire ensemble. Cette zone peut servir à présenter ton approche, ton lien au projet, et la manière dont tu construis Altharys dans le temps.
+            </p>
+            <p>
+              L’idée ici n’est pas de faire une biographie froide, mais une présentation simple, vivante et sincère.
+            </p>
+          </article>
+
+          <article class="content-card">
+            <h2>Pourquoi Altharys</h2>
+            <p>
+              Bloc à remplir ensemble. Ici, on peut expliquer ce que représente Altharys pour toi, pourquoi cette histoire existe, et ce que tu veux transmettre à travers Kael, son parcours et le monde qui l’entoure.
+            </p>
+          </article>
+
+          <article class="content-card">
+            <h2>Suivre le projet</h2>
+            <p>
+              Retrouver Altharys sur les différentes plateformes de lecture et sur les réseaux où le projet continue d’évoluer.
+            </p>
+
+            <div class="button-row">
+              <a class="btn btn-primary" href="https://www.wattpad.com/story/406416505-altharys-seconde-vie" target="_blank" rel="noopener noreferrer">Wattpad</a>
+              <a class="btn btn-secondary" href="https://fr.purrfiction.io/book/1408/FR/altharys-seconde-vie" target="_blank" rel="noopener noreferrer">Purrfiction</a>
+              <a class="btn btn-secondary" href="https://nocteller.com/book/7349-altharys-seconde-vie" target="_blank" rel="noopener noreferrer">Nocteller</a>
+              <a class="btn btn-secondary" href="https://x.com/berthe14200" target="_blank" rel="noopener noreferrer">Twitter / X</a>
+              <a class="btn btn-secondary" href="https://www.instagram.com/cr00shi/" target="_blank" rel="noopener noreferrer">Instagram</a>
+            </div>
+          </article>
+
+        </div>
+      </div>
+    </section>
+  </main>
+</body>
+</html>
